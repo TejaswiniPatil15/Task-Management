@@ -1,0 +1,147 @@
+/* Import SLDS */
+@import '../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css';
+
+/* Global styles (base + SLDS overrides) */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Form styles */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Task list specific */
+.task-list-wrapper {
+  padding: 16px;
+}
+
+.task-list-wrapper .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.task-list-wrapper .header .right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+}
+.task-table th, .task-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+}
+.task-table thead th {
+  background: #fafafa;
+  font-weight: 600;
+}
+.task-table .actions button { margin-right: 6px }
+.empty { text-align: center; padding: 20px; color: #888 }
+
+/* Modal styles */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; z-index:2000 }
+.modal { width: 720px; background: white; border-radius: 3px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); overflow: hidden }
+.modal-header { display:flex; align-items:center; justify-content:space-between; padding: 16px 20px; border-bottom:1px solid #eee }
+.modal-header h2 { margin:0 }
+.modal-body { padding: 16px 20px; display:block }
+.modal-body .row { display:flex; gap:12px; margin-bottom:12px }
+.modal-body .row.single { flex-direction:column }
+.modal-body .col { flex:1 }
+.modal-body label { display:block; margin-bottom:6px; font-weight:600 }
+.modal-body input[type="date"], .modal-body select, .modal-body input[type="text"], .modal-body textarea { width:100%; padding:8px; border:1px solid #ddd; border-radius:4px }
+.modal-footer { padding:12px 20px; display:flex; justify-content:flex-end; gap:10px; border-top:1px solid #eee }
+.btn-cancel { background:#f6e7c9; border:1px solid #e6c97a }
+.btn-save { background:#70836d; color:white; border:1px solid #5f6e5f }
+
+/* Confirm modal */
+.confirm-modal { position: fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.35); z-index:2100 }
+.confirm-box { width:600px; background:white; box-shadow:0 8px 24px rgba(0,0,0,0.2) }
+.confirm-header { background:#c93a3a; color:white; padding:16px; font-size:20px; text-align:center }
+.confirm-body { padding:20px; }
+.confirm-footer { display:flex; justify-content:flex-end; gap:10px; padding:12px 20px 20px }
+

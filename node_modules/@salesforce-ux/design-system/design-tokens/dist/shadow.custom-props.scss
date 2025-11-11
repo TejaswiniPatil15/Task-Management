@@ -1,0 +1,11 @@
+:root {
+    /* Shadow with double border style outset */
+    --slds-g-shadow-outset-focus-1: 0 0 0 2px #FFFFFF, 0 0 0 4px #0B5CAB;
+    /* Shadow with double border style inset */
+    --slds-g-shadow-inset-focus-1: 0 0 0 2px #FFFFFF inset, 0 0 0 4px #0B5CAB inset;
+    /* Shadow with double border style inset inverse */
+    --slds-g-shadow-inset-inverse-focus-1: 0 0 0 2px #0B5CAB inset, 0 0 0 4px #FFFFFF inset;
+    /* Shadow around the border */
+    --slds-g-shadow-outline-focus-1: 0 0 0 2px #0B5CAB;
+  }
+  

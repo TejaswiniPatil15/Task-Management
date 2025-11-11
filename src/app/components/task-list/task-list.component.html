@@ -1,0 +1,335 @@
+<div class="slds-scope">
+  <article class="slds-card">
+    <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span
+            class="slds-icon_container slds-icon-standard:task"
+            title="tasks"
+          >
+            <svg class="slds-icon slds-icon_medium" aria-hidden="true">
+              <use
+                xlink:href="assets/slds/icons/standard-sprite/svg/symbols.svg#task"
+              ></use>
+            </svg>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+            <a
+              href="javascript:void(0);"
+              class="slds-card__header-link slds-truncate"
+            >
+              <span class="slds-text-heading_small">Tasks</span>
+            </a>
+          </h2>
+          <p class="slds-text-body_small">All Tasks</p>
+          <p class="slds-text-body_small slds-m-top_xx-small">
+            {{ filteredTasksList.length }} records
+          </p>
+        </div>
+      </header>
+      <div class="slds-grid slds-grid_align-end">
+        <div class="slds-grid slds-wrap" style="width: 300px">
+          <div class="slds-col slds-size_1-of-1 slds-m-bottom_x-small">
+            <button
+              class="slds-button custom-yellow-button slds-p-horizontal_medium slds-p-vertical_xx-small slds-m-right_x-small"
+              (click)="openNew()"
+            >
+              <span class="slds-text-align_center">New Task</span>
+            </button>
+            <button
+              class="slds-button custom-yellow-button slds-p-horizontal_medium slds-p-vertical_xx-small"
+              (click)="refreshTasks()"
+            >
+              <span class="slds-text-align_center">Refresh</span>
+            </button>
+          </div>
+          <div class="slds-col slds-size_1-of-1">
+            <div class="slds-form-element">
+              <div
+                class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+              >
+                <input
+                  type="search"
+                  class="slds-input"
+                  placeholder="Search tasks..."
+                  [(ngModel)]="searchTerm"
+                />
+                <svg
+                  class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                  aria-hidden="true"
+                >
+                  <use
+                    xlink:href="assets/slds/icons/utility-sprite/svg/symbols.svg#search"
+                  ></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-card__body">
+      <div class="slds-card__body_inner">
+        <div
+          class="slds-p-horizontal_medium slds-p-vertical_x-small slds-m-bottom_small"
+        ></div>
+        <table
+          class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_striped slds-no-row-hover"
+        >
+          <thead>
+            <tr class="slds-line-height_reset">
+              <th scope="col">
+                <div class="slds-th__action slds-text-link_reset">
+                  <span class="slds-truncate" title="Assigned To"
+                    >Assigned To</span
+                  >
+                </div>
+              </th>
+              <th scope="col">
+                <div class="slds-th__action slds-text-link_reset">
+                  <span class="slds-truncate" title="Status">Status</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="slds-th__action slds-text-link_reset">
+                  <span class="slds-truncate" title="Due Date">Due Date</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="slds-th__action slds-text-link_reset">
+                  <span class="slds-truncate" title="Priority">Priority</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="slds-th__action slds-text-link_reset">
+                  <span class="slds-truncate" title="Comments">Comments</span>
+                </div>
+              </th>
+              <th scope="col" style="width: 4rem">
+                <div class="slds-th__action">
+                  <span class="slds-assistive-text">Row actions</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let task of pagedTasksList" class="slds-hint-parent">
+              <td>
+                <div class="slds-truncate">{{ task.assignedTo || "-" }}</div>
+              </td>
+
+              <td>
+                <div
+                  class="slds-badge"
+                  [ngClass]="{
+                    'slds-theme_success': task.status === 'Completed',
+                    'slds-theme_warning': task.status === 'In Progress',
+                    'slds-theme_error': task.status === 'Blocked',
+                    'slds-theme_info': !task.status
+                  }"
+                >
+                  {{ task.status || "Not Started" }}
+                </div>
+              </td>
+
+              <td>
+                <div class="slds-truncate">
+                  {{ task.dueDate ? (task.dueDate | date : "shortDate") : "-" }}
+                </div>
+              </td>
+
+              <td>
+                <div
+                  class="slds-badge"
+                  [ngClass]="{
+                    'slds-theme_error': task.priority === 'High',
+                    'slds-theme_warning': task.priority === 'Medium',
+                    'slds-theme_success': task.priority === 'Low',
+                    'slds-theme_info': !task.priority
+                  }"
+                >
+                  {{ task.priority || "None" }}
+                </div>
+              </td>
+
+              <td>
+                <div
+                  class="slds-truncate"
+                  [title]="task.comments || task.description || '-'"
+                >
+                  {{ task.comments || task.description || "-" }}
+                </div>
+              </td>
+
+              <td style="position: relative; overflow: visible">
+                <div
+                  class="slds-dropdown-trigger slds-dropdown-trigger_click"
+                  [class.slds-is-open]="openMenuTaskId === task.id"
+                >
+                  <!-- Circular Icon Button -->
+                  <button
+                    class="circle-action-btn"
+                    aria-haspopup="true"
+                    (click)="toggleRowMenu(task.id)"
+                    title="More actions"
+                  >
+                    <svg
+                      class="slds-button__icon slds-button__icon_x-small"
+                      aria-hidden="true"
+                    >
+                      <use
+                        xlink:href="assets/slds/icons/utility-sprite/svg/symbols.svg#down"
+                      ></use>
+                    </svg>
+                    <span class="slds-assistive-text">Open actions</span>
+                  </button>
+
+                  <!-- Dropdown Menu with Arrow -->
+                  <div
+                    class="custom-dropdown slds-dropdown slds-dropdown_right"
+                    *ngIf="openMenuTaskId === task.id"
+                  >
+                    <div class="dropdown-arrow"></div>
+                    <ul class="slds-dropdown__list" role="menu">
+                      <li class="slds-dropdown__item" role="presentation">
+                        <a
+                          role="menuitem"
+                          href="#"
+                          (click)="openEdit(task); closeRowMenu($event)"
+                          >Edit</a
+                        >
+                      </li>
+                      <li class="slds-dropdown__item" role="presentation">
+                        <a
+                          role="menuitem"
+                          href="#"
+                          (click)="
+                            openDeleteConfirm(task); closeRowMenu($event)
+                          "
+                          >Delete</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="pagedTasksList.length === 0">
+              <td
+                colspan="6"
+                class="slds-text-align_center slds-p-around_medium"
+              >
+                No tasks found.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <footer class="slds-card__footer">
+      <div class="slds-grid slds-grid_align-spread">
+        <div class="slds-col">
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="page-size-select"
+              >Show</label
+            >
+            <div class="slds-form-element__control">
+              <div class="slds-select_container">
+                <select
+                  id="page-size-select"
+                  class="slds-select"
+                  [(ngModel)]="pageSize"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-col">
+          <div class="slds-button-group" role="group">
+            <button
+              class="slds-button slds-button_neutral"
+              (click)="goToPage(1)"
+            >
+              First
+            </button>
+            <button
+              class="slds-button slds-button_neutral"
+              (click)="goToPage(page - 1)"
+            >
+              Prev
+            </button>
+            <span class="slds-m-horizontal_small"
+              >{{ page }} / {{ totalPages }}</span
+            >
+            <button
+              class="slds-button slds-button_neutral"
+              (click)="goToPage(page + 1)"
+            >
+              Next
+            </button>
+            <button
+              class="slds-button slds-button_neutral"
+              (click)="goToPage(totalPages)"
+            >
+              Last
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </article>
+</div>
+
+<!-- Task Form Modal -->
+<app-task-form
+  *ngIf="showFormModal"
+  [task]="selectedTask"
+  (saved)="onSaved($event)"
+  (closed)="onClosed()"
+></app-task-form>
+
+<section
+  role="dialog"
+  class="slds-modal slds-fade-in-open custom-delete-modal"
+  *ngIf="showDeleteConfirm"
+>
+  <div class="slds-modal__container">
+    <header class="slds-modal__header custom-modal-header">
+      <h2 class="slds-text-heading_medium slds-align_absolute-center">
+        Delete
+      </h2>
+    </header>
+
+    <div class="slds-modal__content slds-p-around_medium">
+      <p>Do you want to delete task {{ task?.name }}?</p>
+    </div>
+
+    <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+      <button
+        type="button"
+        class="slds-button custom-no-button slds-m-right_small"
+        (click)="confirmDelete(false)"
+      >
+        No
+      </button>
+      <button
+        type="button"
+        class="slds-button custom-yes-button"
+        (click)="confirmDelete(true)"
+      >
+        Yes
+      </button>
+    </footer>
+  </div>
+</section>
+
+<div *ngIf="showDeleteConfirm" class="slds-backdrop slds-backdrop_open"></div>

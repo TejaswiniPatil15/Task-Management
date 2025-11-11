@@ -1,0 +1,270 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+.slds-card {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1);
+  
+  .slds-card__header {
+    padding: .75rem 1rem;
+    background: #f3f2f2;
+  }
+}
+
+/* Allow dropdowns to escape card bounds */
+.slds-card {
+  overflow: visible;
+  position: relative;
+}
+
+.slds-badge {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  border-radius: 15rem;
+  white-space: nowrap;
+  
+  &.slds-theme_success {
+    background-color: #4bca81;
+  }
+  
+  &.slds-theme_warning {
+    background-color: #ffb75d;
+  }
+  
+  &.slds-theme_error {
+    background-color: #c23934;
+  }
+  
+  &.slds-theme_info {
+    background-color: #54698d;
+  }
+}
+
+.custom-yellow-button {
+  background-color: #fff7e6 !important; // Light yellow
+  border: 1px solid #ffbe42 !important;
+  color: #2e2e2c !important;
+
+  &:hover {
+    background-color: #fff0cc !important; // Slightly darker on hover
+  }
+
+  .slds-button{
+    padding : 0.5rem 1rem !important;
+
+  }
+  .slds-button__icon {
+    --sds-c-icon-color-foreground: #2e2e2c;
+  }
+}
+
+.slds-button_icon {
+  .slds-button__icon {
+    --sds-c-icon-color-foreground: #706e6b;
+    
+    &.slds-button__icon_error {
+      --sds-c-icon-color-foreground: #c23934;
+    }
+  }
+}
+
+.slds-table {
+  .slds-button-group {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  tr:hover .slds-button-group {
+    opacity: 1;
+  }
+}
+
+/* Ensure dropdown menus inside table rows render above the footer/pagination */
+.slds-card__body,
+.slds-card__body_inner {
+  overflow: visible; /* allow dropdowns to overflow the body */
+}
+
+/* Make the trigger the positioning context so the dropdown can escape the
+   card body and overlap the footer/pagination. */
+.slds-dropdown-trigger {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force the dropdown to be absolutely positioned and sit above pagination.
+   Adjust top/right to align the menu visually over Prev/Next controls. */
+.slds-dropdown {
+  position: absolute !important;
+  top: 2.25rem; /* tweak if you want it closer/further from the row */
+  right: 0;
+  z-index: 99999 !important; /* ensure it sits above footer/pagination */
+  min-width: 8rem;
+}
+
+.slds-dropdown-trigger.slds-is-open {
+  z-index: 5000; /* ensure open trigger + menu are top stacking context */
+}
+
+.slds-badge {
+  text-transform: capitalize;
+  font-weight: 600;
+
+  &.slds-theme_success {
+    background-color: #4bca81;
+    color: white;
+  }
+
+  &.slds-theme_warning {
+    background-color: #ffb75d;
+    color: #514f4d;
+  }
+
+  &.slds-theme_error {
+    background-color: #c23934;
+    color: white;
+  }
+}
+
+.slds-checkbox {
+  [type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.slds-illustration_small {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Style dropdown menu items (Edit/Delete) to have a light-yellow hover similar to the custom-yellow-button */
+.slds-dropdown__list {
+  a[role="menuitem"] {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a[role="menuitem"]:hover,
+  a[role="menuitem"]:focus {
+    background-color: #fff7e6; /* same light yellow */
+    color: #2e2e2c;
+  }
+}
+
+/* Lower footer stacking so dropdowns can overlap Prev/Next pagination buttons */
+.slds-card__footer {
+  position: relative;
+  z-index: 1 !important; /* keep footer under dropdowns */
+  pointer-events: auto;
+}
+
+/* Ensure the open trigger + menu are above most things */
+.slds-dropdown-trigger.slds-is-open {
+  z-index: 99999 !important;
+}
+
+/* Circular icon button with subtle O hover effect */
+.circle-action-btn {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid #d8dde6;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.circle-action-btn:hover {
+  background: #f4f6f9;
+  box-shadow: 0 0 0 2px #0176d3 inset; /* blue O effect */
+}
+
+.circle-action-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0176d3 inset;
+}
+
+/* Dropdown styling with arrow */
+.custom-dropdown {
+  position: absolute;
+  right: 0.5rem;
+  top: -3.2rem;
+  min-width: 8rem;
+  z-index: 2000;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  background: white;
+  animation: fadeIn 0.15s ease;
+}
+
+/* Arrow pointer */
+.dropdown-arrow {
+  position: absolute;
+  right: 0.8rem;
+  bottom: -0.4rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.1));
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slds-icon_container, .slds-icon-standard-task {
+  background-color: #f3f3f3;
+  color : brown
+}
+
+/* Modal styling */
+.custom-delete-modal {
+  z-index: 9999;
+}
+
+/* Red header */
+.custom-modal-header {
+  background-color: #d32f2f; /* Bright red */
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Buttons */
+.custom-no-button {
+  background-color: #a5b99f; /* soft green-grey */
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+}
+
+.custom-yes-button {
+  background-color: #ffe082; /* light yellow */
+  color: #333;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+}
+
+/* Hover states */
+.custom-no-button:hover {
+  background-color: #8ca389;
+}
+
+.custom-yes-button:hover {
+  background-color: #ffda6b;
+}

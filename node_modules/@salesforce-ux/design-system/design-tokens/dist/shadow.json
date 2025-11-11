@@ -1,0 +1,6 @@
+{
+  "shadow-outset-focus-1": "0 0 0 2px #FFFFFF, 0 0 0 4px #0B5CAB",
+  "shadow-inset-focus-1": "0 0 0 2px #FFFFFF inset, 0 0 0 4px #0B5CAB inset",
+  "shadow-inset-inverse-focus-1": "0 0 0 2px #0B5CAB inset, 0 0 0 4px #FFFFFF inset",
+  "shadow-outline-focus-1": "0 0 0 2px #0B5CAB"
+}

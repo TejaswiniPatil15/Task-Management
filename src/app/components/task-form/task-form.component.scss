@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.slds-modal__header {
+  position: relative;
+}
+
+.slds-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  color: #6b6b6b; 
+  cursor: pointer;
+}
+
+.slds-modal__close .slds-button__icon {
+  fill: currentColor; 
+}
+
+.custom-yellow-button {
+  background-color: #ffbe42!important;
+  border: 1px solid #ffbe42 !important;
+  color: #2e2e2c !important;
+  padding: 0.2rem 1rem;
+  border-radius: 4px;
+}
+
+.custom-yellow-button:hover {
+  background-color: #fff0cc !important;
+}
+
+.custom-yellow-button .slds-button__icon {
+  --sds-c-icon-color-foreground: #2e2e2c;
+}
